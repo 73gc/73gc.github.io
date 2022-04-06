@@ -28,8 +28,10 @@
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/05/wallhaven-1j6rzv_1920x1080.png">
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/05/IMG_016720220405-162120.jpg">
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/05/IMG_016820220405-162804.jpg">
+<meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_016920220406-151129.jpg">
+<meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_017020220406-152046.jpg">
 <meta property="article:published_time" content="2022-04-01T09:22:28.000Z">
-<meta property="article:modified_time" content="2022-04-05T08:37:03.546Z">
+<meta property="article:modified_time" content="2022-04-06T07:40:31.320Z">
 <meta property="article:author" content="Mojo">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -206,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-05 16:37:03" itemprop="dateModified" datetime="2022-04-05T16:37:03+08:00">2022-04-05</time>
+                <time title="修改时间：2022-04-06 15:40:31" itemprop="dateModified" datetime="2022-04-06T15:40:31+08:00">2022-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,7 +237,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>364</span>
+              <span>744</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -258,7 +260,12 @@
 <span id="more"></span>
 
 <hr>
-<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><h2 id="产生死锁的条件"><a href="#产生死锁的条件" class="headerlink" title="产生死锁的条件"></a>产生死锁的条件</h2><ul>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>多个进程竞争共享资源而引起的进程不能向前推进的僵死状态叫做死锁</p>
+<h2 id="产生死锁的原因"><a href="#产生死锁的原因" class="headerlink" title="产生死锁的原因"></a>产生死锁的原因</h2><ol>
+<li>竞争共享资源</li>
+<li>进程推进顺序不当</li>
+</ol>
+<h2 id="产生死锁的条件"><a href="#产生死锁的条件" class="headerlink" title="产生死锁的条件"></a>产生死锁的条件</h2><ul>
 <li>互斥条件</li>
 <li>请求和保持条件</li>
 <li>不剥夺条件</li>
@@ -297,6 +304,42 @@
     color: #999;
     padding: 2px;">安全性检测算法流程图</div>
 </center>
+
+<h3 id="死锁的检测和解除"><a href="#死锁的检测和解除" class="headerlink" title="死锁的检测和解除"></a>死锁的检测和解除</h3><h4 id="资源分配图"><a href="#资源分配图" class="headerlink" title="资源分配图"></a>资源分配图</h4><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_016920220406-151129.jpg">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">资源分配图示例</div>
+</center>
+用圆圈代表一个进程，方框代表一类资源。请求边有进程指向方框中的r<sub>j</sub>，分配边应始于方框中的一个小圆圈
+
+<h4 id="死锁定理"><a href="#死锁定理" class="headerlink" title="死锁定理"></a>死锁定理</h4><p>S为死锁状态的充分条件是当且仅当S状态的资源分配图是不可能完全简化的</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_017020220406-152046.jpg">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">资源分配图的简化</div>
+</center>
+
+<ol>
+<li>找到一个既不阻塞又非独立的进程节点p<sub>i</sub>（即找出一条有向边与它相连，且该有向边对应资源的申请数量小于等于系统中已有空闲资源数量），消去它的请求边和分配边，使之成为孤立的节点</li>
+<li>进程p<sub>i</sub>所释放的资源，可以唤醒某些因等待这些资源而阻塞的进程，原来的阻塞进程可以变为非阻塞进程。根据1中的方法进行一系列简化后，若能消去图中所有的边，则称该图是可完全简化的</li>
+</ol>
+<h4 id="死锁的解除"><a href="#死锁的解除" class="headerlink" title="死锁的解除"></a>死锁的解除</h4><ul>
+<li>进程终止</li>
+<li>资源抢占</li>
+<li>回滚</li>
+</ul>
+<p><strong>饥饿</strong>：进程因长时间不能获得所需资源而处于无限等待的状态</p>
+
     </div>
 
     
@@ -401,7 +444,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">产生死锁的条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%AD%BB%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">处理死锁的基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%A2%84%E9%98%B2"><span class="nav-number">1.2.1.</span> <span class="nav-text">死锁的预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%81%BF%E5%85%8D"><span class="nav-number">1.2.2.</span> <span class="nav-text">死锁的避免</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">银行家算法</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">产生死锁的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">产生死锁的条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%AD%BB%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">处理死锁的基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%A2%84%E9%98%B2"><span class="nav-number">1.3.1.</span> <span class="nav-text">死锁的预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">死锁的避免</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">银行家算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E5%92%8C%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.</span> <span class="nav-text">死锁的检测和解除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E5%9B%BE"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">资源分配图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">死锁定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">死锁的解除</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -483,7 +526,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">36 分钟</span>
 </div>
 
         
