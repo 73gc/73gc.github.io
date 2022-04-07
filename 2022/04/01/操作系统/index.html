@@ -30,8 +30,9 @@
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/05/IMG_016820220405-162804.jpg">
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_016920220406-151129.jpg">
 <meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/06/IMG_017020220406-152046.jpg">
+<meta property="og:image" content="http://fwnhub.cn/Chevereto/images/2022/04/07/IMG_017120220407-161026.jpg">
 <meta property="article:published_time" content="2022-04-01T09:22:28.000Z">
-<meta property="article:modified_time" content="2022-04-06T07:40:31.320Z">
+<meta property="article:modified_time" content="2022-04-07T08:22:19.518Z">
 <meta property="article:author" content="Mojo">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -208,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-06 15:40:31" itemprop="dateModified" datetime="2022-04-06T15:40:31+08:00">2022-04-06</time>
+                <time title="修改时间：2022-04-07 16:22:19" itemprop="dateModified" datetime="2022-04-07T16:22:19+08:00">2022-04-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,7 +238,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>744</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -339,7 +340,62 @@
 <li>回滚</li>
 </ul>
 <p><strong>饥饿</strong>：进程因长时间不能获得所需资源而处于无限等待的状态</p>
+<hr>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><ul>
+<li>实现内存分配、内存回收等基本内存管理功能</li>
+<li>提高空间的利用率和内存的访问速度</li>
+</ul>
+<p><strong>局部性原理</strong>：时间局部性、空间局部性</p>
+<h2 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h2><p>绝大多数情况下，源程序需要经过编译、链接、装入几个阶段才能执行</p>
+<h3 id="程序的装入"><a href="#程序的装入" class="headerlink" title="程序的装入"></a>程序的装入</h3><ul>
+<li><strong>绝对装入方式</strong>：事先已知程序在内存中的驻留位置</li>
+<li><strong>可重定位装入方式（静态重定位）</strong></li>
+<li><strong>动态运行时装入方式（动态重定位）</strong>：地址映射必须延迟到进程执行时在进行</li>
+</ul>
+<h3 id="程序的链接"><a href="#程序的链接" class="headerlink" title="程序的链接"></a>程序的链接</h3><p>将编译后的目标模块装配成一个可执行的程序</p>
+<h4 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h4><p>将目标模块链接成一个完整的装入模块</p>
+<ul>
+<li><strong>优点</strong>：静态链接程序运行的速度较快</li>
+<li><strong>缺点</strong>：<ul>
+<li>可执行目标比较大，占用的内、外存空间较大，使存储开销大</li>
+<li>使程序开发不够灵活方便，修改某一个模块会导致整个程序的重新链接</li>
+</ul>
+</li>
+</ul>
+<h4 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h4><p>目标模块的链接推迟到执行时再进行</p>
+<ul>
+<li>节省内存和外存空间</li>
+<li>方便程序开发</li>
+<li>程序运行时速度变慢</li>
+</ul>
+<h2 id="连续分配存储管理方式"><a href="#连续分配存储管理方式" class="headerlink" title="连续分配存储管理方式"></a>连续分配存储管理方式</h2><p>连续分配是指操作系统分配内存时，为每个进程分配一块物理地址连续的内存空间</p>
+<h3 id="单一连续分配"><a href="#单一连续分配" class="headerlink" title="单一连续分配"></a>单一连续分配</h3><p>适用于单用户单任务的OS</p>
+<h3 id="固定分区分配"><a href="#固定分区分配" class="headerlink" title="固定分区分配"></a>固定分区分配</h3><p>将用户内存空间划分为若干个固定大小的区域，在每个用户分区中可以装入一道作业<br><strong>数据结构</strong>：固定分区使用表</p>
+<h3 id="动态分区分配"><a href="#动态分区分配" class="headerlink" title="动态分区分配"></a>动态分区分配</h3><p>根据进程的实际需要为进程分配大小合适的内存区域，系统中用户分区的数量和大小都是动态变化的</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>空闲分区表、<strong>空闲分区链</strong></p>
+<h4 id="动态分区分配的算法"><a href="#动态分区分配的算法" class="headerlink" title="动态分区分配的算法"></a>动态分区分配的算法</h4><ul>
+<li>首次适应算法FF</li>
+<li>循环首次适应算法NF</li>
+<li>最佳适应算法BF</li>
+<li>最差适应算法WF</li>
+</ul>
+<h4 id="内存分配流程图"><a href="#内存分配流程图" class="headerlink" title="内存分配流程图"></a>内存分配流程图</h4><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="http://fwnhub.cn/Chevereto/images/2022/04/07/IMG_017120220407-161026.jpg">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">内存分配流程图</div>
+</center>
 
+<h4 id="内存回收流程"><a href="#内存回收流程" class="headerlink" title="内存回收流程"></a>内存回收流程</h4><ol>
+<li>释放一块连续的内存区域</li>
+<li>如果被释放区域与其他空闲分区相邻，则合并空闲分区，否则为该回收区建立一个空闲分区链表的节点</li>
+<li>修改空闲分区链表</li>
+</ol>
+<h3 id="紧凑"><a href="#紧凑" class="headerlink" title="紧凑"></a>紧凑</h3>
     </div>
 
     
@@ -444,7 +500,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">产生死锁的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">产生死锁的条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%AD%BB%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">处理死锁的基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%A2%84%E9%98%B2"><span class="nav-number">1.3.1.</span> <span class="nav-text">死锁的预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">死锁的避免</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">银行家算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E5%92%8C%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.</span> <span class="nav-text">死锁的检测和解除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E5%9B%BE"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">资源分配图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">死锁定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">死锁的解除</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">1.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">产生死锁的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">产生死锁的条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%AD%BB%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">处理死锁的基本方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%A2%84%E9%98%B2"><span class="nav-number">1.3.1.</span> <span class="nav-text">死锁的预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E9%81%BF%E5%85%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">死锁的避免</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">银行家算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E6%A3%80%E6%B5%8B%E5%92%8C%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.</span> <span class="nav-text">死锁的检测和解除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D%E5%9B%BE"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">资源分配图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E5%AE%9A%E7%90%86"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">死锁定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E9%99%A4"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">死锁的解除</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%A3%85%E5%85%A5%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">程序的装入和链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%A3%85%E5%85%A5"><span class="nav-number">2.1.1.</span> <span class="nav-text">程序的装入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.2.</span> <span class="nav-text">程序的链接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">动态链接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">连续分配存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D"><span class="nav-number">2.2.1.</span> <span class="nav-text">单一连续分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D"><span class="nav-number">2.2.2.</span> <span class="nav-text">固定分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D"><span class="nav-number">2.2.3.</span> <span class="nav-text">动态分区分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">动态分区分配的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">内存分配流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">内存回收流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A7%E5%87%91"><span class="nav-number">2.2.4.</span> <span class="nav-text">紧凑</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -520,7 +576,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">41k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
