@@ -10,8 +10,8 @@ http://mojo73.top/2022/10/10/hello-world/
 http://mojo73.top/2022/05/17/%E5%AD%97%E8%8A%82%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/
 http://mojo73.top/2022/04/27/%E7%BD%91%E7%BB%9CI-O/
 http://mojo73.top/about/index.html
-http://mojo73.top/categories/index.html
 http://mojo73.top/schedule/index.html
+http://mojo73.top/categories/index.html
 http://mojo73.top/tags/index.html
 http://mojo73.top/
 http://mojo73.top/tags/C/
