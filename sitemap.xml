@@ -195,13 +195,6 @@
   </url>
   
   <url>
-    <loc>http://mojo73.top/tags/%E6%A8%A1%E6%9D%BF/</loc>
-    <lastmod>2022-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://mojo73.top/tags/vps/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -231,6 +224,13 @@
   
   <url>
     <loc>http://mojo73.top/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2022-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://mojo73.top/tags/%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -281,14 +281,14 @@
   </url>
   
   <url>
-    <loc>http://mojo73.top/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://mojo73.top/categories/CS-Notes/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://mojo73.top/categories/CS-Notes/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://mojo73.top/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2022-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
