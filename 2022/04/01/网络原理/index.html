@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mojo73.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="网络原理">
+<meta property="og:url" content="http://mojo73.top/2022/04/01/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="MojoのBlog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/04/wallhaven-zml7xv_1920x1080.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/06/20160204105742700.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/06/20160204120152796.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/13/tcp.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/20210824152616658.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/23665552-d381503a7b82b402.png">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/TCP.png">
+<meta property="article:published_time" content="2022-04-01T09:22:54.000Z">
+<meta property="article:modified_time" content="2022-10-10T17:02:49.911Z">
+<meta property="article:author" content="Mojo">
+<meta property="article:tag" content="网络原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/04/wallhaven-zml7xv_1920x1080.png">
+
+<link rel="canonical" href="http://mojo73.top/2022/04/01/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>网络原理 | MojoのBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MojoのBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MojoのBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://mojo73.top/2022/04/01/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mojo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MojoのBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-01 17:22:54" itemprop="dateCreated datePublished" datetime="2022-04-01T17:22:54+08:00">2022-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-11 01:02:49" itemprop="dateModified" datetime="2022-10-11T01:02:49+08:00">2022-10-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-Notes/" itemprop="url" rel="index"><span itemprop="name">CS-Notes</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-Notes/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">网络原理</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/04/wallhaven-zml7xv_1920x1080.png"></p>
+<span id="more"></span>
+<hr>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="ISP"><a href="#ISP" class="headerlink" title="ISP"></a>ISP</h2><p>互联网服务提供者ISP，又称互联网服务提供商</p>
+<h2 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h2><p>建立连接、通话、释放连接</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>在通话的全部时间内，通话的两个用户始终占用端到端的通信资源</li>
+<li>线路传输效率低</li>
+</ul>
+<h2 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h2><p>存储转发</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>高效、灵活、迅速、可靠</p>
+<h2 id="计算机网络的性能指标"><a href="#计算机网络的性能指标" class="headerlink" title="计算机网络的性能指标"></a>计算机网络的性能指标</h2><ul>
+<li><strong>速率</strong>：数据的传输速率，bit&#x2F;s(bps)，也称为数据率</li>
+<li><strong>带宽</strong>：1、信号具有的频带宽度，单位赫兹；2、单位时间内网络中某信道所能通过的“最高数据率”，单位bit&#x2F;s</li>
+<li><strong>吞吐量</strong>：单位时间内通过某个网络的实际数据量</li>
+<li><strong>时延</strong>：数据从网络的一端传送到另一端所需的时间。也成为延迟或迟延</li>
+</ul>
+<h3 id="发送时延"><a href="#发送时延" class="headerlink" title="发送时延"></a>发送时延</h3><p>主机或路由器发送数据帧所需要的时间，也称传输时延<br>发送时延&#x3D;数据帧长度(bit)&#x2F;发送速率(bit&#x2F;s)</p>
+<h3 id="传播时延"><a href="#传播时延" class="headerlink" title="传播时延"></a>传播时延</h3><p>电磁波在信道中传播一定距离需要花费的时间<br>传播时延&#x3D;信道长度(m)&#x2F;电磁波在信道上的传播速率(m&#x2F;s)</p>
+<h3 id="处理时延"><a href="#处理时延" class="headerlink" title="处理时延"></a>处理时延</h3><p>主机或路由器在收到分组时需要花费一定时间进行处理</p>
+<h3 id="排队时延"><a href="#排队时延" class="headerlink" title="排队时延"></a>排队时延</h3><p>分组进入路由器后要先在输入队列中排队等待处理，路由器确定转发接口后，还要在输出队列中排队等待转发</p>
+<h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h2><ul>
+<li><strong>OSI</strong>：应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</li>
+<li><strong>TCP&#x2F;IP</strong>：应用层、运输层、网际层IP、链路层</li>
+<li><strong>五层协议的体系结构</strong>：应用层、运输层、网络层、数据链路层、物理层</li>
+</ul>
+<hr>
+<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><hr>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><p><strong>链路</strong>：从一个节点到相邻节点的物理线路<br><strong>数据链路</strong>：链路+通信协议</p>
+<h2 id="信道分类"><a href="#信道分类" class="headerlink" title="信道分类"></a>信道分类</h2><ul>
+<li>点对点信道</li>
+<li>广播信道</li>
+</ul>
+<h2 id="基本问题"><a href="#基本问题" class="headerlink" title="基本问题"></a>基本问题</h2><p>封装成帧、透明传输、差错检测</p>
+<h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><p>将网络层传下来的分组添加帧首部和尾部，构成一个帧</p>
+<h3 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h3><p>某一个实际存在的事物看起来好像不存在一样<br>无论什么样的比特组合的数据，都能按照原样没有差错地通过这个数据链路层</p>
+<h3 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h3><p>循环冗余检验CRC，检测比特差错</p>
+<h2 id="点对点协议PPP"><a href="#点对点协议PPP" class="headerlink" title="点对点协议PPP"></a>点对点协议PPP</h2><p>用户计算机和ISP进行通信时所使用地数据链路层协议</p>
+<h3 id="三个组成部分"><a href="#三个组成部分" class="headerlink" title="三个组成部分"></a>三个组成部分</h3><ul>
+<li>一个将IP数据报封装到串行链路地方法</li>
+<li>链路控制协议LCP</li>
+<li>网络控制协议NCP</li>
+</ul>
+<h3 id="PPP帧格式"><a href="#PPP帧格式" class="headerlink" title="PPP帧格式"></a>PPP帧格式</h3><p><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/06/20160204105742700.png"></p>
+<table>
+<thead>
+<tr>
+<th align="left">协议字段</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0x0021</td>
+<td align="left">IP数据报</td>
+</tr>
+<tr>
+<td align="left">0xC021</td>
+<td align="left">LCP的数据</td>
+</tr>
+<tr>
+<td align="left">0x8021</td>
+<td align="left">网络层控制数据</td>
+</tr>
+</tbody></table>
+<h3 id="PPP协议的工作状态"><a href="#PPP协议的工作状态" class="headerlink" title="PPP协议的工作状态"></a>PPP协议的工作状态</h3><p><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/06/20160204120152796.png"></p>
+<h4 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h4><ul>
+<li>用户拨号接入ISP，建立物理连接</li>
+<li>用户个人电脑向ISP发送一系列LCP分组，建立LCP连接</li>
+<li>网络控制协议NCP给新接入的用户分配一个临时的IP地址</li>
+</ul>
+<h4 id="连接释放"><a href="#连接释放" class="headerlink" title="连接释放"></a>连接释放</h4><ul>
+<li>NCP释放网络层连接，收回IP地址</li>
+<li>LCP释放数据链路层连接</li>
+<li>最后释放物理层连接</li>
+</ul>
+<h2 id="共享媒体通信资源"><a href="#共享媒体通信资源" class="headerlink" title="共享媒体通信资源"></a>共享媒体通信资源</h2><h3 id="静态划分信道"><a href="#静态划分信道" class="headerlink" title="静态划分信道"></a>静态划分信道</h3><p>频分复用、时分复用、波分复用、码分复用</p>
+<h3 id="动态媒体接入控制"><a href="#动态媒体接入控制" class="headerlink" title="动态媒体接入控制"></a>动态媒体接入控制</h3><p>随机接入、受控接入</p>
+<h2 id="CSMA-x2F-CD协议"><a href="#CSMA-x2F-CD协议" class="headerlink" title="CSMA&#x2F;CD协议"></a>CSMA&#x2F;CD协议</h2><p>CSMA&#x2F;CD表示载波监听多点接入&#x2F;碰撞检测</p>
+<ul>
+<li><strong>多点接入</strong>：许多计算机以多点接入的方式连接在一根总线上</li>
+<li><strong>载波监听</strong>：边发送边监听。不管发送数据之前还是发送数据之中，每个站必须不停地检测信道</li>
+<li><strong>碰撞检测</strong>：边发送数据边检测信道上的信号电压的变化情况<br>单程端到端传播时延记为τ，发送数据的站点最多经过两倍端到端的传播时延(2τ)即可知道是否发生碰撞，2τ称为<strong>争用期</strong></li>
+</ul>
+<h3 id="截断二进制指数退避算法"><a href="#截断二进制指数退避算法" class="headerlink" title="截断二进制指数退避算法"></a>截断二进制指数退避算法</h3><ul>
+<li>基本退避时间为争用期2τ</li>
+<li>从离散的整数集合[0,1,…,(2<sup>k</sup>-1)]中随机一个数r，重传推后的时间为r倍的争用期。k&#x3D;Min[重传次数，10]</li>
+<li>重传16次仍不成功时，丢弃该帧，向高层报告</li>
+</ul>
+<h3 id="CSMA-x2F-CD要点"><a href="#CSMA-x2F-CD要点" class="headerlink" title="CSMA&#x2F;CD要点"></a>CSMA&#x2F;CD要点</h3><ol>
+<li><strong>准备发送</strong>：适配器从网络层获得一个分组，添加以太网帧的首部和尾部，组成以太网帧，放入适配器的缓存中。发送之前，先<strong>检测信道</strong></li>
+<li><strong>检测信道</strong>：若检测到信道正忙，则继续不停的检测，一直等待信道转为空闲，在96比特时间（帧间最小间隔）内信道保持空闲，就发送这个帧</li>
+<li><strong>边发送边监听</strong>：<ul>
+<li><strong>发送成功</strong>：争用期内未检测到碰撞。回到1</li>
+<li><strong>发送失败</strong>：争用期内检测到碰撞。立即停止发送，并按规定发送人为干扰信号。适配器执行指数退避算法，返回步骤2。</li>
+<li>重传16次不成功，停止重传并向高层报告</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><h2 id="静态路由和动态路由"><a href="#静态路由和动态路由" class="headerlink" title="静态路由和动态路由"></a>静态路由和动态路由</h2><ul>
+<li>静态路由时由系统管理员设计与构建的路由表规定的路由。适用于网关数量有限的场合，且网络拓扑结构不经常变化的网络。其缺点是不能动态地适应网络的变化，当网络状况变化后必须由网络管理员修改路由表</li>
+<li>动态路由是由路由选择协议而动态构建的，路由协议之间通过交换各自所拥有的路由信息实时跟新路由表的内容。动态路由可以自动学习网络的拓扑结构，并更新路由表。其缺点是路由广播信息将占据大量网络带宽</li>
+</ul>
+<hr>
+<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><p><strong>两个协议</strong>：用户数据报协议UDP、传输控制协议TCP</p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><ul>
+<li>UDP是无连接的</li>
+<li>尽最大努力交付</li>
+<li>面向报文</li>
+<li>无拥塞控制</li>
+<li>支持一对一，一对多，多对一和多对多通信</li>
+<li>首部开销小</li>
+</ul>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul>
+<li>面向连接</li>
+<li>点对点</li>
+<li>可靠交付</li>
+<li>全双工</li>
+<li>面向字节流</li>
+</ul>
+<h3 id="可靠传输工作原理"><a href="#可靠传输工作原理" class="headerlink" title="可靠传输工作原理"></a>可靠传输工作原理</h3><p><strong>停止等待协议</strong>：每发送完一个分组就停止发送，等待对方的确认，收到确认后发送下一个分组</p>
+<ul>
+<li>无差错</li>
+<li>出现差错接收方丢弃分组；超时重传，发送方等待确认，超时后重传分组</li>
+<li>确认丢失和确认迟到</li>
+</ul>
+<h4 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h4><p><strong>累积确认</strong>：对按序到达的最后一个分组发送确认</p>
+<h3 id="TCP报文首部格式"><a href="#TCP报文首部格式" class="headerlink" title="TCP报文首部格式"></a>TCP报文首部格式</h3><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="http://fwnhub.cn:8080/Chevereto/images/2022/04/13/tcp.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">TCP报文格式</div>
+</center>
+
+<ul>
+<li><strong>确认号</strong>：期望收到对方下一个报文段的第一个数据字节的序号<ul>
+<li>紧急URG</li>
+<li><strong>确认ACK</strong></li>
+<li>推送PSH</li>
+<li>复位RST</li>
+<li><strong>同步SYN</strong></li>
+<li><strong>终止FIN</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h3><p>发送方窗口不能超过接收方给出的接收窗口的数值</p>
+<h3 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h3><ul>
+<li>慢开始</li>
+<li>拥塞避免</li>
+<li>快重传</li>
+<li>快恢复<br><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/20210824152616658.png"></li>
+</ul>
+<h3 id="TCP连接建立"><a href="#TCP连接建立" class="headerlink" title="TCP连接建立"></a>TCP连接建立</h3><p>三次握手<br><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/23665552-d381503a7b82b402.png"></p>
+<ul>
+<li>最初两端的TCP进程都处于CLOSED(关闭)状态，A主动打开连接，B被动打开</li>
+<li>B的TCP服务器进程先创建<strong>传输控制快</strong>TCB，准备接受客户进程的连接请求，然后服务器进程就处于LISTEN(收听)状态</li>
+<li><strong>一次握手</strong>：A的TCP客户进程也是首先创建传输控制块TCB，A向B发送连接请求报文段，同步位SYN&#x3D;1，同时选择一个初始序号seq&#x3D;x。SYN报文段不能携带数据，但要消耗掉一个序号，TCP客户进程进入SYN-SENT(同步已发送状态)</li>
+<li><strong>二次握手</strong>：B接受连接请求后，同意建立连接，向A发送确认，SYN和ACK位都置1，确认号ack&#x3D;x+1，选择一个初始序号seq&#x3D;y。TCP服务进程进入SYN-RCVD(同步收到)状态</li>
+<li><strong>三次握手</strong>：TCP客户进程收到B的确认后，向B发送确认，确认报文ACK置1，确认号ack&#x3D;y+1，自己的序号seq&#x3D;x+1。ACK报文段可以携带数据，不携带数据不消耗序号。TCP连接建立，A进入ESTABLISHED(已建立连接)状态</li>
+<li>B收到A的确认后，也进入ESTABLISHED状态</li>
+</ul>
+<h3 id="TCP连接释放"><a href="#TCP连接释放" class="headerlink" title="TCP连接释放"></a>TCP连接释放</h3><p>四次挥手<br><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/16/TCP.png"></p>
+<ul>
+<li><strong>一次挥手</strong>：初始A和B处于ESTABLISHED状态。A向B发出连接释放报文，并停止发送数据，主动关闭TCP连接。A把连接释放报文首部的终止控制位FIN置1，序号seq&#x3D;u。A进入FIN-WAIT-1(终止等待1)状态。FIN不携带数据，消耗掉一个序号</li>
+<li><strong>二次挥手</strong>：B收到连接释放报文后即发出确认，确认号ack&#x3D;u+1，学号seq&#x3D;v。B进入CLOSE-WAIT(关闭等待)状态</li>
+<li>A收到B的确认后进入FIN-WAIT-2(终止等待2)状态。等待B发出的连接释放报文</li>
+<li><strong>三次挥手</strong>：B没有向A发送的数据，B向A发出连接释放报文，FIN&#x3D;1，假定序号seq&#x3D;w，重复发送过的确认号ack&#x3D;u+1。B进入LAST-ACK(最后确认)状态</li>
+<li><strong>四次挥手</strong>：A收到B的连接释放报文后，对此发出确认，确认报文段ACK置1，确认号ack&#x3D;w+1，序号seq&#x3D;u+1。A进入TIME-WAIT(时间等待)状态。等待2MSL时间进入CLOSE状态</li>
+</ul>
+<h3 id="TCP粘包、拆包问题"><a href="#TCP粘包、拆包问题" class="headerlink" title="TCP粘包、拆包问题"></a>TCP粘包、拆包问题</h3><h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><ul>
+<li><strong>拆包</strong><ol>
+<li>要发送的数据大于TCP发送缓冲区的大小，将会发生拆包</li>
+<li>要发送的数据大于最大报文段长度MSS</li>
+</ol>
+</li>
+<li><strong>粘包</strong><ol>
+<li>要发送的数据小于发送缓冲区的大小，TCP将多次写入缓冲区的数据一次发送出去将会发生粘包</li>
+<li>接收端的应用层没有及时的读取接受缓冲区的数据</li>
+</ol>
+</li>
+</ul>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ol>
+<li>发送端给每个数据包添加首部，首部中包含数据包的长度，这样接收端在收到数据后，通过读取首部长度字段便知道每个数据包的实际长度</li>
+<li>发送端将每个包封装为固定长度，不足的补0，接收端从接收缓冲区读取固定长度的数据</li>
+<li>在数据之间设置边界，如特殊符号，接收端通过边界拆分不同的数据包</li>
+</ol>
+<hr>
+<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/" rel="tag"># 网络原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/01/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="prev" title="操作系统">
+      <i class="fa fa-chevron-left"></i> 操作系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/01/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="数据库">
+      数据库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ISP"><span class="nav-number">1.1.</span> <span class="nav-text">ISP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">电路交换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">分组交换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.3.1.</span> <span class="nav-text">优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">1.4.</span> <span class="nav-text">计算机网络的性能指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%97%B6%E5%BB%B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">发送时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">传播时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">处理时延</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6"><span class="nav-number">1.4.4.</span> <span class="nav-text">排队时延</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">计算机网络体系结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">物理层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">3.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E9%81%93%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">信道分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98"><span class="nav-number">3.2.</span> <span class="nav-text">基本问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7"><span class="nav-number">3.2.1.</span> <span class="nav-text">封装成帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93"><span class="nav-number">3.2.2.</span> <span class="nav-text">透明传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">差错检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AEPPP"><span class="nav-number">3.3.</span> <span class="nav-text">点对点协议PPP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">三个组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP%E5%B8%A7%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.3.2.</span> <span class="nav-text">PPP帧格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81"><span class="nav-number">3.3.3.</span> <span class="nav-text">PPP协议的工作状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.3.3.1.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE"><span class="nav-number">3.3.3.2.</span> <span class="nav-text">连接释放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E5%AA%92%E4%BD%93%E9%80%9A%E4%BF%A1%E8%B5%84%E6%BA%90"><span class="nav-number">3.4.</span> <span class="nav-text">共享媒体通信资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%88%92%E5%88%86%E4%BF%A1%E9%81%93"><span class="nav-number">3.4.1.</span> <span class="nav-text">静态划分信道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AA%92%E4%BD%93%E6%8E%A5%E5%85%A5%E6%8E%A7%E5%88%B6"><span class="nav-number">3.4.2.</span> <span class="nav-text">动态媒体接入控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSMA-x2F-CD%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.5.</span> <span class="nav-text">CSMA&#x2F;CD协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%AA%E6%96%AD%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E9%80%80%E9%81%BF%E7%AE%97%E6%B3%95"><span class="nav-number">3.5.1.</span> <span class="nav-text">截断二进制指数退避算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSMA-x2F-CD%E8%A6%81%E7%82%B9"><span class="nav-number">3.5.2.</span> <span class="nav-text">CSMA&#x2F;CD要点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1%E5%92%8C%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-number">4.1.</span> <span class="nav-text">静态路由和动态路由</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="nav-number">5.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP"><span class="nav-number">5.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP"><span class="nav-number">5.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">5.2.1.</span> <span class="nav-text">可靠传输工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%ADARQ%E5%8D%8F%E8%AE%AE"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">连续ARQ协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E6%8A%A5%E6%96%87%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.2.2.</span> <span class="nav-text">TCP报文首部格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">5.2.3.</span> <span class="nav-text">TCP流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">5.2.4.</span> <span class="nav-text">TCP拥塞控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B"><span class="nav-number">5.2.5.</span> <span class="nav-text">TCP连接建立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE"><span class="nav-number">5.2.6.</span> <span class="nav-text">TCP连接释放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E7%B2%98%E5%8C%85%E3%80%81%E6%8B%86%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">5.2.7.</span> <span class="nav-text">TCP粘包、拆包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.2.7.1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.7.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="nav-number">6.</span> <span class="nav-text">应用层</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mojo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mojo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">50k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">46 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

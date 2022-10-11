@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mojo73.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="http://mojo73.top/2022/04/01/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="MojoのBlog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/05/wallhaven-zmljpw_1920x1080.png">
+<meta property="article:published_time" content="2022-04-01T09:23:06.000Z">
+<meta property="article:modified_time" content="2022-10-10T17:02:49.911Z">
+<meta property="article:author" content="Mojo">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://fwnhub.cn:8080/Chevereto/images/2022/04/05/wallhaven-zmljpw_1920x1080.png">
+
+<link rel="canonical" href="http://mojo73.top/2022/04/01/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据库 | MojoのBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MojoのBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MojoのBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://mojo73.top/2022/04/01/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mojo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MojoのBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-01 17:23:06" itemprop="dateCreated datePublished" datetime="2022-04-01T17:23:06+08:00">2022-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-11 01:02:49" itemprop="dateModified" datetime="2022-10-11T01:02:49+08:00">2022-10-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-Notes/" itemprop="url" rel="index"><span itemprop="name">CS-Notes</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS-Notes/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>709</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://fwnhub.cn:8080/Chevereto/images/2022/04/05/wallhaven-zmljpw_1920x1080.png"></p>
+<span id="more"></span>
+<hr>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><ul>
+<li><strong>原子性</strong>：事务被视为不可分割的最小单元，事物的全部操作要么全部提交，要么全部失败</li>
+<li><strong>一致性</strong>：数据库在事务执行的前后都保持一致状态。在一致状态下，不同事务对同一个数据的读取结果是相同的</li>
+<li><strong>隔离性</strong>：一个事务所做的修改在提交前，对其它事务是不可见的</li>
+<li><strong>持续性</strong>：事务对数据库的修改是永久的</li>
+</ul>
+<h1 id="并发一致性问题"><a href="#并发一致性问题" class="headerlink" title="并发一致性问题"></a>并发一致性问题</h1><ul>
+<li>丢失修改</li>
+<li>脏读</li>
+<li>不可重复读</li>
+<li>幻读</li>
+</ul>
+<h1 id="封锁粒度"><a href="#封锁粒度" class="headerlink" title="封锁粒度"></a>封锁粒度</h1><p>表级、行级</p>
+<ul>
+<li>互斥锁（X锁，写锁）</li>
+<li>共享锁（S锁，读锁）</li>
+</ul>
+<h2 id="兼容关系"><a href="#兼容关系" class="headerlink" title="兼容关系"></a>兼容关系</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">X</th>
+<th align="left">S</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">X</td>
+<td align="left">N</td>
+<td align="left">N</td>
+</tr>
+<tr>
+<td align="left">S</td>
+<td align="left">N</td>
+<td align="left">Y</td>
+</tr>
+</tbody></table>
+<h2 id="三级封锁协议"><a href="#三级封锁协议" class="headerlink" title="三级封锁协议"></a>三级封锁协议</h2><ul>
+<li><strong>一级封锁协议</strong>：事务在修改数据前需要加X锁，事务结束后释放<ul>
+<li>可以解决丢失修改的问题</li>
+</ul>
+</li>
+<li><strong>二级封锁协议</strong>：在一级封锁协议的基础上，数据在读取数据时要为其加S锁，读取完之后释放<ul>
+<li>可以解决脏读问题</li>
+</ul>
+</li>
+<li><strong>三级封锁协议</strong>：在二级封锁协议的基础上，事务在读取数据前要为其添加S锁，事务完成后释放S锁<ul>
+<li>可以解决不可重复读问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="两端锁协议"><a href="#两端锁协议" class="headerlink" title="两端锁协议"></a>两端锁协议</h2><p>事务的加锁和解锁分两个阶段进行</p>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><p>隔离级别能够解决的问题</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">脏读</th>
+<th align="left">不可重复读</th>
+<th align="left">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">未提交读</td>
+<td align="left">×</td>
+<td align="left">×</td>
+<td align="left">×</td>
+</tr>
+<tr>
+<td align="left">读提交</td>
+<td align="left">√</td>
+<td align="left">×</td>
+<td align="left">×</td>
+</tr>
+<tr>
+<td align="left">可重复读</td>
+<td align="left">√</td>
+<td align="left">√</td>
+<td align="left">×</td>
+</tr>
+<tr>
+<td align="left">可串行化</td>
+<td align="left">√</td>
+<td align="left">√</td>
+<td align="left">√</td>
+</tr>
+</tbody></table>
+<p>mysql事务默认的隔离级别是可重复读</p>
+<h1 id="MVCC多版本并发控制"><a href="#MVCC多版本并发控制" class="headerlink" title="MVCC多版本并发控制"></a>MVCC多版本并发控制</h1><p>写操作更新最新的版本快照，读操作读取旧的版本快照<br>MVCC规定只能读取已经提交的快照</p>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>与红黑树比较</p>
+<ul>
+<li>B+树具有更低的树高</li>
+<li>磁盘访问原理，一个物理块可以存储更多的节点</li>
+<li>减少预读特性</li>
+</ul>
+<h2 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h2><ul>
+<li>可以提高数据检索的效率，降低数据库的IO成本</li>
+<li>通过索引列对数据进行排序，降低了CPU的消耗</li>
+</ul>
+<h2 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h2><ul>
+<li>占用磁盘空间</li>
+<li>降低更新表的效率，插入删除会破坏平衡性，需要对树进行分裂、合并、旋转等操作来维护平衡性</li>
+</ul>
+<h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><h3 id="单列索引"><a href="#单列索引" class="headerlink" title="单列索引"></a>单列索引</h3><ul>
+<li>普通索引：没有任何限制</li>
+<li>唯一索引：索引列中的值唯一，允许空值</li>
+<li>主键索引：特殊的唯一索引，不允许空值</li>
+</ul>
+<h3 id="组合索引"><a href="#组合索引" class="headerlink" title="组合索引"></a>组合索引</h3><p>对多个列进行索引</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/01/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/" rel="prev" title="网络原理">
+      <i class="fa fa-chevron-left"></i> 网络原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/14/LeetCode146-LRU%E7%BC%93%E5%AD%98/" rel="next" title="LeetCode 146.LRU缓存">
+      LeetCode 146.LRU缓存 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">1.1.</span> <span class="nav-text">ACID</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">并发一致性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%81%E9%94%81%E7%B2%92%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">封锁粒度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%BC%E5%AE%B9%E5%85%B3%E7%B3%BB"><span class="nav-number">3.1.</span> <span class="nav-text">兼容关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%BA%A7%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text">三级封锁协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%AB%AF%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.3.</span> <span class="nav-text">两端锁协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">隔离级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MVCC%E5%A4%9A%E7%89%88%E6%9C%AC%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">MVCC多版本并发控制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">6.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">6.1.</span> <span class="nav-text">B+树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">6.2.</span> <span class="nav-text">索引的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">6.3.</span> <span class="nav-text">索引的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="nav-number">6.4.</span> <span class="nav-text">索引分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%88%97%E7%B4%A2%E5%BC%95"><span class="nav-number">6.4.1.</span> <span class="nav-text">单列索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E7%B4%A2%E5%BC%95"><span class="nav-number">6.4.2.</span> <span class="nav-text">组合索引</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mojo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mojo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">50k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">46 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
