@@ -29,7 +29,7 @@
 <meta property="og:description" content="嗨嗨嗨">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-10T09:23:12.000Z">
-<meta property="article:modified_time" content="2022-10-12T09:43:37.273Z">
+<meta property="article:modified_time" content="2022-10-12T09:55:15.443Z">
 <meta property="article:author" content="Mojo">
 <meta property="article:tag" content="面试宝典">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-12 17:43:37" itemprop="dateModified" datetime="2022-10-12T17:43:37+08:00">2022-10-12</time>
+                <time title="修改时间：2022-10-12 17:55:15" itemprop="dateModified" datetime="2022-10-12T17:55:15+08:00">2022-10-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,14 +259,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
+              <span>7.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -540,6 +540,17 @@ K-->One</pre>
 <p>单体应用：ALL IN ONE</p>
 <p>微服务是一种架构风格，一个大型复杂软件应用由一个或多个微服务组成。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力</p>
 <p>微服务，从本质意义上看，还是 SOA 架构。但内涵有所不同，微服务并不绑定某种特殊的技术，在一个微服务的系统中，可以有 Java 编写的服务，也可以有 Python编写的服务，他们是靠Restful架构风格统一成一个系统的。所以微服务本身与具体技术实现无关，扩展性强。</p>
+<h1 id="五、前后端完全分离与Rest规范"><a href="#五、前后端完全分离与Rest规范" class="headerlink" title="五、前后端完全分离与Rest规范"></a>五、前后端完全分离与Rest规范</h1><p>http是目前在互联网上使用最多的协议，没有之一。可是http的创始人一直都觉得，在过去10几年来，所有的人都在错误的使用Http。</p>
+<p>这句话怎么说呢？如果说你要删除一个数据，以往的做法通常是 delete&#x2F;{id}，如果你要更新一个数据，可能是Post数据放Body，然后方法是 update&#x2F;{id}， 或者是artichle&#x2F;{id}?method&#x3D;update。</p>
+<blockquote>
+<p>这种做法让我很暴燥，我觉得这个世界不该这样的，所有的人都在误解而且在严重错误的误解Http的设计初衷，好比是发明了火药却只用它来做烟花爆竹。</p>
+</blockquote>
+<p>那么正确的使用方式是什么呢？如果你要看Rest各种特性，你恐怕真的很难理解Rest，但是如果你看错误的使用http的人倒底儿了哪些错，什么是Rest就特别容易理解了。</p>
+<p><strong>第一条，混乱。</strong> 一万个人心里有一万个Url的命名规则，Url是统一资源定位符，重点是资源。而很多人却把它当成了万金油，每一个独立的虚拟的网页都可以随意使用，各种操作都能够迭加。这是混乱的来源之一。</p>
+<p><strong>第二条，贪婪。</strong> 有状态和无状态全部混在一起。特别是在购物车或者是登录的应用中，经常刷新就丢失带来的用户体验简直棒棒哒。每一个请求并不能单独的响应一些功能，很多的功能混杂在一起里。这是人性贪婪的本质，也是各种Hack的起源，只要能够把问题解决掉，总会有人用他认为最方便的方式去解决问题，比如说汽车门把手坏掉了直接系根绳子当把手，emmmm这样确实很棒啊。</p>
+<p><strong>第三条，无序。</strong> 返回的结果往往是很随意，各种错误信息本来就是用Http的状态码构成的，可是很多人还是喜欢把错误信息返回在返回值中。最常见的就是Code和Message，Http本身的错误和服务器的内部错误还是需要在不断层面分开的，不能混在一起。可是在大神眼里并非如此，这个再议。</p>
+<p><strong>怎么解决这些问题呢？强迫症患者的福音就是先颁规则，第一个规则就是明确Url是什么，该怎么用。就是所有的Url本质来讲，都应该是一种资源。一个独立的Url地址，就是对应一个独一无二的资源。怎么样？这种感觉是不是棒棒哒？一个冰淇淋，一个老师，一间房子，在Url上对应的都是一个资源，不会有多余的Url跟他对应，也不会表示有多个Url地址~~注意，这里点的是Url地址，并不是单独的参数，他就是一个&#x2F;room&#x2F;{room_id}这样的东西，举个栗子,&#x2F;room&#x2F;3242 这就表示3242号房间。</strong></p>
+<p>这是一个清爽的世界啊，你想想，之前的Url是什么都要，我开房，可能是&#x2F;open&#x2F;room&#x2F;3242 我要退房可能是&#x2F;exit&#x2F;3242&#x2F;room，我要打理房间，可能是room&#x2F;3242?method&#x3D;clean.</p>
 
     </div>
 
@@ -645,7 +656,7 @@ K-->One</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">一、大型网站系统的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%A4%A7%E6%B5%81%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">高并发，大流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">海量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E5%B8%83%E5%B9%BF%E6%B3%9B%EF%BC%8C%E7%BD%91%E7%BB%9C%E6%83%85%E5%86%B5%E5%A4%8D%E6%9D%82"><span class="nav-number">1.4.</span> <span class="nav-text">用户分布广泛，网络情况复杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%8E%AF%E5%A2%83%E6%81%B6%E5%8A%A3"><span class="nav-number">1.5.</span> <span class="nav-text">安全环境恶劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%BF%AB%E9%80%9F%E5%8F%98%E6%9B%B4%EF%BC%8C%E5%8F%91%E5%B8%83%E9%A2%91%E7%B9%81"><span class="nav-number">1.6.</span> <span class="nav-text">需求快速变更，发布频繁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8F%E5%8F%91%E5%B1%95"><span class="nav-number">1.7.</span> <span class="nav-text">渐进式发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务和数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B"><span class="nav-number">2.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">2.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8CCDN%E5%8A%A0%E9%80%9F%E7%BD%91%E7%AB%99%E5%93%8D%E5%BA%94"><span class="nav-number">2.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-NoSQL-%E5%92%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">2.8.</span> <span class="nav-text">使用 NoSQL 和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%8B%86%E5%88%86"><span class="nav-number">2.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.10.</span> <span class="nav-text">分布式微服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8B%86%E5%88%86-VS-%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">三、拆分 VS 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1-VS-SOA"><span class="nav-number">4.</span> <span class="nav-text">四、微服务 VS SOA</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">一、大型网站系统的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%A4%A7%E6%B5%81%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">高并发，大流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">海量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E5%B8%83%E5%B9%BF%E6%B3%9B%EF%BC%8C%E7%BD%91%E7%BB%9C%E6%83%85%E5%86%B5%E5%A4%8D%E6%9D%82"><span class="nav-number">1.4.</span> <span class="nav-text">用户分布广泛，网络情况复杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%8E%AF%E5%A2%83%E6%81%B6%E5%8A%A3"><span class="nav-number">1.5.</span> <span class="nav-text">安全环境恶劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%BF%AB%E9%80%9F%E5%8F%98%E6%9B%B4%EF%BC%8C%E5%8F%91%E5%B8%83%E9%A2%91%E7%B9%81"><span class="nav-number">1.6.</span> <span class="nav-text">需求快速变更，发布频繁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8F%E5%8F%91%E5%B1%95"><span class="nav-number">1.7.</span> <span class="nav-text">渐进式发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务和数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B"><span class="nav-number">2.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">2.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8CCDN%E5%8A%A0%E9%80%9F%E7%BD%91%E7%AB%99%E5%93%8D%E5%BA%94"><span class="nav-number">2.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-NoSQL-%E5%92%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">2.8.</span> <span class="nav-text">使用 NoSQL 和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%8B%86%E5%88%86"><span class="nav-number">2.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.10.</span> <span class="nav-text">分布式微服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8B%86%E5%88%86-VS-%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">三、拆分 VS 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1-VS-SOA"><span class="nav-number">4.</span> <span class="nav-text">四、微服务 VS SOA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E5%AE%8C%E5%85%A8%E5%88%86%E7%A6%BB%E4%B8%8ERest%E8%A7%84%E8%8C%83"><span class="nav-number">5.</span> <span class="nav-text">五、前后端完全分离与Rest规范</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -723,13 +734,13 @@ K-->One</pre>
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">56k</span>
+    <span title="站点总字数">57k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">51 分钟</span>
+    <span title="站点阅读时长">52 分钟</span>
 </div>
 
         
