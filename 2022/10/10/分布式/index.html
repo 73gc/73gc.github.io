@@ -29,7 +29,7 @@
 <meta property="og:description" content="嗨嗨嗨">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-10T09:23:12.000Z">
-<meta property="article:modified_time" content="2022-10-12T09:55:15.443Z">
+<meta property="article:modified_time" content="2022-10-17T11:33:04.073Z">
 <meta property="article:author" content="Mojo">
 <meta property="article:tag" content="面试宝典">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-12 17:55:15" itemprop="dateModified" datetime="2022-10-12T17:55:15+08:00">2022-10-12</time>
+                <time title="修改时间：2022-10-17 19:33:04" itemprop="dateModified" datetime="2022-10-17T19:33:04+08:00">2022-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,14 +259,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.3k</span>
+              <span>10k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -551,6 +551,53 @@ K-->One</pre>
 <p><strong>第三条，无序。</strong> 返回的结果往往是很随意，各种错误信息本来就是用Http的状态码构成的，可是很多人还是喜欢把错误信息返回在返回值中。最常见的就是Code和Message，Http本身的错误和服务器的内部错误还是需要在不断层面分开的，不能混在一起。可是在大神眼里并非如此，这个再议。</p>
 <p><strong>怎么解决这些问题呢？强迫症患者的福音就是先颁规则，第一个规则就是明确Url是什么，该怎么用。就是所有的Url本质来讲，都应该是一种资源。一个独立的Url地址，就是对应一个独一无二的资源。怎么样？这种感觉是不是棒棒哒？一个冰淇淋，一个老师，一间房子，在Url上对应的都是一个资源，不会有多余的Url跟他对应，也不会表示有多个Url地址~~注意，这里点的是Url地址，并不是单独的参数，他就是一个&#x2F;room&#x2F;{room_id}这样的东西，举个栗子,&#x2F;room&#x2F;3242 这就表示3242号房间。</strong></p>
 <p>这是一个清爽的世界啊，你想想，之前的Url是什么都要，我开房，可能是&#x2F;open&#x2F;room&#x2F;3242 我要退房可能是&#x2F;exit&#x2F;3242&#x2F;room，我要打理房间，可能是room&#x2F;3242?method&#x3D;clean.</p>
+<p><strong>够了！这些乱七八糟的东西全够了，让世界回归清爽的本质，一间房，就是&#x2F;room&#x2F;3242 没有别的Url地址了。</strong></p>
+<p><strong>那想要对这个资源有操作怎么办？http有几种Method来着？get,put,post,delete,还有其他隐藏的4种。在过去的混乱世界里，经常用的就是Get和Post。如果不是因为Get不支持大数据传输，估计连Post都不会有人使用。</strong></p>
+<p>而对资源最常见的操作是什么？CRUD，就是创建，读，更新，删除。再看Http的Method？是不是非常完美？</p>
+<p>总之，这四种方法够不够你浪？你有本身找出来更多的对资源的操作来啊，我还有4个Method没用过呢。如果这4个真的不够了，有什么问题，大不了我再重新更改http协议啊。</p>
+<!-- 其实简单说，对于Rest理解到这里就够了。后续的东西，都是在这一条基础上空想出来的，比强迫症更强迫症，当然，无状态我是百分百支持的。以上的各种表述可能不太准确，也纯属是我的意淫和各种小道资料，并未考据，但是凭良心讲，我是早就看不惯黑暗年代里的Url命名风格了，所以当时最早接触到Rest的时候，瞬间就找到了真爱，我靠，这不就是我一直想要的答案吗？
+
+但是我一直想的仅仅是命名规范，从来没有把自己的思考角度放在一个url就是一个资源，所有的操作都是对资源的更改而言的角度上啊。所以你能理解到的程度，更多的就是在于你要弄清楚你要解决的什么问题，如果你的问题只是理解Rest，恐怕你很理解，如果你的问题是怎么解决Url混乱的问题，你反而很快能弄懂了~ -->
+
+<blockquote>
+<p><strong>Rest操作最佳实践：</strong>现在在很多企业中，虽然都在支持Rest规范，但是真正严格遵守的几乎没有，因为按照Rest规范，删除需要发送Delete请求，插入需要发送PUT请求，过于繁琐，并且有些框架，例如ajax，Springmvc等，对Delete和PUT请求的支持不太友好，所以实际应用中很少使用这两种请求，一般还是只是用Get和Post请求，使用接口名字来区分，所以，对于Rest规范，只需要记得传递数据只使用JSON，而不是后端去渲染模板，从而实现前后端的完全分离。</p>
+</blockquote>
+<h1 id="六、CAP三进二和Base定理"><a href="#六、CAP三进二和Base定理" class="headerlink" title="六、CAP三进二和Base定理"></a>六、CAP三进二和Base定理</h1><h2 id="关系型数据库遵循ACID规则"><a href="#关系型数据库遵循ACID规则" class="headerlink" title="关系型数据库遵循ACID规则"></a>关系型数据库遵循ACID规则</h2><p>事务在英文中是transaction，和现实世界中的交易很类似，它有如下四个特性：</p>
+<h3 id="A-Atomicity-原子性"><a href="#A-Atomicity-原子性" class="headerlink" title="A (Atomicity) 原子性"></a>A (Atomicity) 原子性</h3><p>原子性很容易理解，也就是说事务里的所有操作要么全部做完，要么都不做，事务成功的条件是事务里的所有操作都成功，只要有一个操作失败，整个事务就失败，需要回滚。比如银行转账，从A账户转100元至B账户，分为两个步骤：1）从A账户取100元；2）存入100元至B账户。这两步要么一起完成，要么一起不完成，如果只完成第一步，第二步失败，钱会莫名其妙少了100元。</p>
+<h3 id="C-Consistency-一致性"><a href="#C-Consistency-一致性" class="headerlink" title="C (Consistency) 一致性"></a>C (Consistency) 一致性</h3><p>一致性也比较容易理解，也就是说数据库要一直处于一致的状态，事务的运行不会改变数据库原本的一致性约束。</p>
+<h3 id="I-Isolation-独立性"><a href="#I-Isolation-独立性" class="headerlink" title="I (Isolation) 独立性"></a>I (Isolation) 独立性</h3><p>所谓的独立性是指并发的事务之间不会互相影响，如果一个事务要访问的数据正在被另外一个事务修改，只要另外一个事务未提交，它所访问的数据就不受未提交事务的影响。比如现有有个交易是从A账户转100元至B账户，在这个交易还未完成的情况下，如果此时B查询自己的账户，是看不到新增加的100元的</p>
+<h3 id="D-Durability-持久性"><a href="#D-Durability-持久性" class="headerlink" title="D (Durability) 持久性"></a>D (Durability) 持久性</h3><p>持久性是指一旦事务提交后，它所做的修改将会永久的保存在数据库上，即使出现宕机也不会丢失。</p>
+<h2 id="CAP三进二"><a href="#CAP三进二" class="headerlink" title="CAP三进二"></a>CAP三进二</h2><p>在分布式系统中，讲究C:Consistency（强一致性）、A:Availability（可用性）、P:Partition tolerance（分区容错性）</p>
+<p>CAP的证明基于异步网络，异步网络也是反映了真实网络中情况的模型。真实的网络系统中，节点之间不可能保持同步，即便是时钟也不可能保持同步，所有的节点依靠获得的消息来进行本地计算和通讯。这个概念其实是相当强的，意味着任何超时判断也是不可能的，因为没有共同的时间标准。之后我们会扩展CAP的证明到弱一点的异步网络中，这个网络中时钟不完全一致，但是时钟运行的步调是一致的，这种系统是允许节点做超时判断的。</p>
+<p>CAP的证明很简单，假设两个节点集{G1, G2}，由于网络分片导致G1和G2之间所有的通讯都断开了，如果不满足P，则整个网络不可用，如果在G1中写，在G2中读刚写的数据， G2中返回的值不可能G1中的写值。由于A的要求，G2一定要返回这次读请求，由于P的存在，导致C一定是不可满足的。</p>
+<p><strong>CAP理论就是说在分布式存储系统中，最多只能实现上面的两点。</strong></p>
+<p><strong>而由于当前的网络硬件肯定会出现延迟丢包等问题，所以分区容忍性是我们必须需要实现的。</strong></p>
+<p><strong>所以我们只能在一致性和可用性之间进行权衡，没有任何分布式系统能同时保证这三点。</strong></p>
+<p><strong>C:强一致性 A：高可用性 P：分布式容忍性</strong></p>
+<p><strong>CA 传统Oracle数据库</strong></p>
+<p><strong>AP 大多数网站架构的选择</strong></p>
+<p><strong>CP Redis、Mongodb</strong></p>
+<p><strong>注意：分布式架构的时候必须做出取舍。</strong></p>
+<p><strong>一致性和可用性之间取一个平衡。多余大多数web应用，其实并不需要强一致性。</strong></p>
+<p><strong>因此牺牲C换取P，这是目前分布式数据库产品的方向</strong></p>
+<h3 id="一致性与可用性的决择"><a href="#一致性与可用性的决择" class="headerlink" title="一致性与可用性的决择"></a>一致性与可用性的决择</h3><p>对于web2.0网站来说，关系数据库的很多主要特性却往往无用武之地</p>
+<h3 id="数据库事务一致性需求"><a href="#数据库事务一致性需求" class="headerlink" title="数据库事务一致性需求"></a>数据库事务一致性需求</h3><p>很多web实时系统并不要求严格的数据库事务，对读一致性的要求很低， 有些场合对写一致性要求并不高。允许实现最终一致性。</p>
+<h3 id="数据库的写实时性和读实时性需求"><a href="#数据库的写实时性和读实时性需求" class="headerlink" title="数据库的写实时性和读实时性需求"></a>数据库的写实时性和读实时性需求</h3><p>对关系数据库来说，插入一条数据之后立刻查询，是肯定可以读出来这条数据的，但是对于很多web应用来说，并不要求这么高的实时性，比方说发一条消息之 后，过几秒乃至十几秒之后，我的订阅者才看到这条动态是完全可以接受的。</p>
+<h3 id="对复杂的SQL查询，特别是多表关联查询的需求"><a href="#对复杂的SQL查询，特别是多表关联查询的需求" class="headerlink" title="对复杂的SQL查询，特别是多表关联查询的需求"></a>对复杂的SQL查询，特别是多表关联查询的需求</h3><p>任何大数据量的web系统，都非常忌讳多个大表的关联查询，以及复杂的数据分析类型的报表查询，特别是SNS类型的网站，从需求以及产品设计角 度，就避免了这种情况的产生。往往更多的只是单表的主键查询，以及单表的简单条件分页查询，SQL的功能被极大的弱化了。</p>
+<p><strong>CAP理论的核心是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求，最多只能同时较好的满足两个。因此，根据 CAP 原理将 NoSQL 数据库分成了满足 CA 原则、满足 CP 原则和满足 AP 原则三 大类：</strong></p>
+<ul>
+<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。</li>
+<li>CP - 满足一致性，分区容忍必的系统，通常性能不是特别高。</li>
+<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
+</ul>
+<h2 id="BASE定理"><a href="#BASE定理" class="headerlink" title="BASE定理"></a>BASE定理</h2><p>BASE就是为了解决关系数据库强一致性引起的问题而引起的可用性降低而提出的解决方案。</p>
+<p>BASE其实是下面三个术语的缩写：</p>
+<ul>
+<li>基本可用（Basically Available）</li>
+<li>软状态（Soft state）</li>
+<li>最终一致（Eventually consistent）</li>
+</ul>
+<p>它的思想是通过让系统放松对某一时刻数据一致性的要求来换取系统整体伸缩性和性能上改观。为什么这么说呢，缘由就在于大型系统往往由于地域分布和极高性能的要求，不可能采用分布式事务来完成这些指标，要想获得这些指标，我们必须采用另外一种方式来完成，这里BASE就是解决这个问题的办法。</p>
 
     </div>
 
@@ -656,7 +703,7 @@ K-->One</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">一、大型网站系统的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%A4%A7%E6%B5%81%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">高并发，大流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">海量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E5%B8%83%E5%B9%BF%E6%B3%9B%EF%BC%8C%E7%BD%91%E7%BB%9C%E6%83%85%E5%86%B5%E5%A4%8D%E6%9D%82"><span class="nav-number">1.4.</span> <span class="nav-text">用户分布广泛，网络情况复杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%8E%AF%E5%A2%83%E6%81%B6%E5%8A%A3"><span class="nav-number">1.5.</span> <span class="nav-text">安全环境恶劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%BF%AB%E9%80%9F%E5%8F%98%E6%9B%B4%EF%BC%8C%E5%8F%91%E5%B8%83%E9%A2%91%E7%B9%81"><span class="nav-number">1.6.</span> <span class="nav-text">需求快速变更，发布频繁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8F%E5%8F%91%E5%B1%95"><span class="nav-number">1.7.</span> <span class="nav-text">渐进式发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务和数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B"><span class="nav-number">2.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">2.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8CCDN%E5%8A%A0%E9%80%9F%E7%BD%91%E7%AB%99%E5%93%8D%E5%BA%94"><span class="nav-number">2.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-NoSQL-%E5%92%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">2.8.</span> <span class="nav-text">使用 NoSQL 和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%8B%86%E5%88%86"><span class="nav-number">2.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.10.</span> <span class="nav-text">分布式微服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8B%86%E5%88%86-VS-%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">三、拆分 VS 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1-VS-SOA"><span class="nav-number">4.</span> <span class="nav-text">四、微服务 VS SOA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E5%AE%8C%E5%85%A8%E5%88%86%E7%A6%BB%E4%B8%8ERest%E8%A7%84%E8%8C%83"><span class="nav-number">5.</span> <span class="nav-text">五、前后端完全分离与Rest规范</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">一、大型网站系统的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91%EF%BC%8C%E5%A4%A7%E6%B5%81%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">高并发，大流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">海量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%88%86%E5%B8%83%E5%B9%BF%E6%B3%9B%EF%BC%8C%E7%BD%91%E7%BB%9C%E6%83%85%E5%86%B5%E5%A4%8D%E6%9D%82"><span class="nav-number">1.4.</span> <span class="nav-text">用户分布广泛，网络情况复杂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%8E%AF%E5%A2%83%E6%81%B6%E5%8A%A3"><span class="nav-number">1.5.</span> <span class="nav-text">安全环境恶劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%BF%AB%E9%80%9F%E5%8F%98%E6%9B%B4%EF%BC%8C%E5%8F%91%E5%B8%83%E9%A2%91%E7%B9%81"><span class="nav-number">1.6.</span> <span class="nav-text">需求快速变更，发布频繁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%90%E8%BF%9B%E5%BC%8F%E5%8F%91%E5%B1%95"><span class="nav-number">1.7.</span> <span class="nav-text">渐进式发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、大型网站架构演化发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%98%B6%E6%AE%B5%E7%9A%84%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">初始阶段的网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E7%A6%BB"><span class="nav-number">2.2.</span> <span class="nav-text">应用服务和数据服务分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">使用缓存改善网站性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%9B%86%E7%BE%A4%E6%94%B9%E5%96%84%E7%BD%91%E7%AB%99%E7%9A%84%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86%E8%83%BD%E5%8A%9B"><span class="nav-number">2.4.</span> <span class="nav-text">使用应用服务器集群改善网站的并发处理能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB"><span class="nav-number">2.5.</span> <span class="nav-text">数据库读写分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8CCDN%E5%8A%A0%E9%80%9F%E7%BD%91%E7%AB%99%E5%93%8D%E5%BA%94"><span class="nav-number">2.6.</span> <span class="nav-text">使用反向代理和CDN加速网站响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.7.</span> <span class="nav-text">使用分布式文件系统和分布式数据库系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-NoSQL-%E5%92%8C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">2.8.</span> <span class="nav-text">使用 NoSQL 和搜索引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%8B%86%E5%88%86"><span class="nav-number">2.9.</span> <span class="nav-text">业务拆分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.10.</span> <span class="nav-text">分布式微服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8B%86%E5%88%86-VS-%E9%9B%86%E7%BE%A4"><span class="nav-number">3.</span> <span class="nav-text">三、拆分 VS 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1-VS-SOA"><span class="nav-number">4.</span> <span class="nav-text">四、微服务 VS SOA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E5%AE%8C%E5%85%A8%E5%88%86%E7%A6%BB%E4%B8%8ERest%E8%A7%84%E8%8C%83"><span class="nav-number">5.</span> <span class="nav-text">五、前后端完全分离与Rest规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81CAP%E4%B8%89%E8%BF%9B%E4%BA%8C%E5%92%8CBase%E5%AE%9A%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">六、CAP三进二和Base定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E9%81%B5%E5%BE%AAACID%E8%A7%84%E5%88%99"><span class="nav-number">6.1.</span> <span class="nav-text">关系型数据库遵循ACID规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Atomicity-%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-number">6.1.1.</span> <span class="nav-text">A (Atomicity) 原子性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Consistency-%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">6.1.2.</span> <span class="nav-text">C (Consistency) 一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I-Isolation-%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">6.1.3.</span> <span class="nav-text">I (Isolation) 独立性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Durability-%E6%8C%81%E4%B9%85%E6%80%A7"><span class="nav-number">6.1.4.</span> <span class="nav-text">D (Durability) 持久性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAP%E4%B8%89%E8%BF%9B%E4%BA%8C"><span class="nav-number">6.2.</span> <span class="nav-text">CAP三进二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8E%E5%8F%AF%E7%94%A8%E6%80%A7%E7%9A%84%E5%86%B3%E6%8B%A9"><span class="nav-number">6.2.1.</span> <span class="nav-text">一致性与可用性的决择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E4%B8%80%E8%87%B4%E6%80%A7%E9%9C%80%E6%B1%82"><span class="nav-number">6.2.2.</span> <span class="nav-text">数据库事务一致性需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%86%99%E5%AE%9E%E6%97%B6%E6%80%A7%E5%92%8C%E8%AF%BB%E5%AE%9E%E6%97%B6%E6%80%A7%E9%9C%80%E6%B1%82"><span class="nav-number">6.2.3.</span> <span class="nav-text">数据库的写实时性和读实时性需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%A4%8D%E6%9D%82%E7%9A%84SQL%E6%9F%A5%E8%AF%A2%EF%BC%8C%E7%89%B9%E5%88%AB%E6%98%AF%E5%A4%9A%E8%A1%A8%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2%E7%9A%84%E9%9C%80%E6%B1%82"><span class="nav-number">6.2.4.</span> <span class="nav-text">对复杂的SQL查询，特别是多表关联查询的需求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BASE%E5%AE%9A%E7%90%86"><span class="nav-number">6.3.</span> <span class="nav-text">BASE定理</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -734,13 +781,13 @@ K-->One</pre>
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">57k</span>
+    <span title="站点总字数">59k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">52 分钟</span>
+    <span title="站点阅读时长">54 分钟</span>
 </div>
 
         
