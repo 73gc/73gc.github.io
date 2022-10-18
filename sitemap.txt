@@ -22,12 +22,12 @@ http://mojo73.top/tags/%E9%9D%A2%E7%BB%8F/
 http://mojo73.top/tags/%E6%9A%91%E6%9C%9F%E5%AE%9E%E4%B9%A0/
 http://mojo73.top/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
 http://mojo73.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/
-http://mojo73.top/tags/%E6%A8%A1%E6%9D%BF/
 http://mojo73.top/tags/vps/
 http://mojo73.top/tags/%E7%BF%BB%E5%A2%99/
 http://mojo73.top/tags/linux/
 http://mojo73.top/tags/%E7%BD%91%E7%BB%9CI-O/
 http://mojo73.top/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/
+http://mojo73.top/tags/%E6%A8%A1%E6%9D%BF/
 http://mojo73.top/categories/CS-Notes/
 http://mojo73.top/categories/leetcode/
 http://mojo73.top/categories/%E9%9D%A2%E8%AF%95%E5%AE%9D%E5%85%B8/
@@ -35,5 +35,5 @@ http://mojo73.top/categories/CS-Notes/C/
 http://mojo73.top/categories/%E9%9D%A2%E7%BB%8F/
 http://mojo73.top/categories/CS-Notes/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
 http://mojo73.top/categories/CS-Notes/%E6%95%B0%E6%8D%AE%E5%BA%93/
-http://mojo73.top/categories/%E7%AE%97%E6%B3%95/
 http://mojo73.top/categories/CS-Notes/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/
+http://mojo73.top/categories/%E7%AE%97%E6%B3%95/
